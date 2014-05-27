@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        android:text="Najdi Smestuvanje"
+	    android:fontFamily="sans-serif-thin"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/requestBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="Send request" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/requestBtn"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_below="@+id/progressBar1"
+        android:layout_centerHorizontal="true"
+        android:text="response_text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-</LinearLayout>
+</RelativeLayout>

@@ -1,14 +1,14 @@
 package mk.korun.najdismestuvanje;
 
 import mk.korun.najdismestuvanje.fragments.TestFragment;
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuInflater;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
         
         
         // Dynamically add fragment to FrameLayout
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		fragmentTransaction.add(R.id.frame_container, new TestFragment());
 		fragmentTransaction.commit();
