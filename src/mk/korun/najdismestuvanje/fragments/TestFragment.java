@@ -1,6 +1,7 @@
 package mk.korun.najdismestuvanje.fragments;
 
 import mk.korun.najdismestuvanje.R;
+import mk.korun.najdismestuvanje.network.JsonRequest;
 import mk.korun.najdismestuvanje.network.VolleyRequest;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,12 +30,10 @@ public class TestFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				VolleyRequest req = new VolleyRequest(getActivity());
-				for(int i = 0; i < 5; ++i)
-					req.send();
+				JsonRequest req = new JsonRequest(getActivity());
+				req.send();
 			}
 		});
-		
 		
 		return view;
 	}
