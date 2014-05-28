@@ -3,5 +3,6 @@
 
     <string name="app_name">Najdi Smestuvanje</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_lifecycle">LifecycleActivity</string>
 
 </resources>

@@ -27,6 +27,7 @@
 
     <ProgressBar
         android:id="@+id/progressBar1"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/requestBtn"
@@ -40,5 +41,22 @@
         android:layout_centerHorizontal="true"
         android:text="response_text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/gotoLifecycleActivityBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Lifecycle" />
+
+    <Button
+        android:id="@+id/gotoIntentActivityBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gotoLifecycleActivityBtn"
+        android:layout_centerHorizontal="true"
+        android:text="Intents" />
 
 </RelativeLayout>

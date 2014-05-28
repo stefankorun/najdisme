@@ -1,12 +1,14 @@
 package mk.korun.najdismestuvanje;
 
 import mk.korun.najdismestuvanje.fragments.TestFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 
 public class MainActivity extends FragmentActivity {
 
@@ -30,5 +32,6 @@ public class MainActivity extends FragmentActivity {
         inflater.inflate(R.menu.activity_main_actions, menu);
         return super.onCreateOptionsMenu(menu);
     }
+    
 
 }

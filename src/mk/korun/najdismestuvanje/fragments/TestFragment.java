@@ -1,8 +1,9 @@
 package mk.korun.najdismestuvanje.fragments;
 
+import mk.korun.najdismestuvanje.LifecycleActivity;
 import mk.korun.najdismestuvanje.R;
 import mk.korun.najdismestuvanje.network.JsonRequest;
-import mk.korun.najdismestuvanje.network.VolleyRequest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -34,7 +35,16 @@ public class TestFragment extends Fragment {
 				req.send();
 			}
 		});
-		
+		Button gotoLifecycleActivityBtn = (Button) view.findViewById(R.id.gotoLifecycleActivityBtn);
+		gotoLifecycleActivityBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getActivity(), LifecycleActivity.class);
+				startActivity(i);
+			}
+		});
 		return view;
 	}
+	
 }
