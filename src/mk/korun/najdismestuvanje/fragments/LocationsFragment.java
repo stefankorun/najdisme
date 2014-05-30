@@ -31,11 +31,15 @@ public class LocationsFragment extends ListFragment {
 	}
 	
 	public void filterLocations(String filter) {
-		filteredLocations.clear();
-		for (String s : locations) {
-			if(s.matches(".*" + filter + ".*")) {
-				filteredLocations.add(s);
+		if(filter != ""){
+			filteredLocations.clear();
+			for (String s : locations) {
+				if(s.matches(".*" + filter + ".*")) {
+					filteredLocations.add(s);
+				}
 			}
+		} else {
+			filteredLocations = (ArrayList<String>) locations.clone();
 		}
 		adapter.notifyDataSetChanged();
 	}

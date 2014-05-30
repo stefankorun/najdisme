@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.method.KeyListener;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
@@ -20,6 +23,7 @@ public class StartActivity extends FragmentActivity {
 		setContentView(R.layout.activity_start);
 		createFragmentLocationsResult();
 		
+		/*
 		findViewById(R.id.edtSearchLocations).setOnKeyListener(new OnKeyListener() {
 			
 			@Override
@@ -29,6 +33,29 @@ public class StartActivity extends FragmentActivity {
 				return false;
 			}
 		});
+		*/
+		((EditText) findViewById(R.id.edtSearchLocations)).addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				locFragment.filterLocations(s.toString());
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 	}
 	
 	private void createFragmentLocationsResult() {
