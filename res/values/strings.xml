@@ -4,5 +4,7 @@
     <string name="app_name">Najdi Smestuvanje</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_lifecycle">LifecycleActivity</string>
+    <string name="title_activity_start">StartActivity</string>
+    <string name="app_title">Најди Сместување</string>
 
 </resources>
