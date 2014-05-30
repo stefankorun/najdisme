@@ -1,6 +1,7 @@
 package mk.korun.najdismestuvanje.fragments;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -30,11 +31,13 @@ public class LocationsFragment extends ListFragment {
 		filteredLocations = new ArrayList<String>(locations);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void filterLocations(String filter) {
 		if(filter != ""){
+			filter = filter.toLowerCase(Locale.getDefault());
 			filteredLocations.clear();
 			for (String s : locations) {
-				if(s.matches(".*" + filter + ".*")) {
+				if(s.toLowerCase(Locale.getDefault()).matches(".*" + filter + ".*")) {
 					filteredLocations.add(s);
 				}
 			}
