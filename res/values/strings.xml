@@ -6,5 +6,6 @@
     <string name="title_activity_lifecycle">LifecycleActivity</string>
     <string name="title_activity_start">StartActivity</string>
     <string name="app_title">Најди Сместување</string>
+    <string name="title_activity_places">PlacesActivity</string>
 
 </resources>

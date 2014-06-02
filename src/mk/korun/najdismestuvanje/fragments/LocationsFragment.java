@@ -3,13 +3,17 @@ package mk.korun.najdismestuvanje.fragments;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import mk.korun.najdismestuvanje.PlacesActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 public class LocationsFragment extends ListFragment {
 	private ArrayList<String> locations;
@@ -53,11 +57,25 @@ public class LocationsFragment extends ListFragment {
 		
 		adapter = new ArrayAdapter<String>(getActivity(), 
 				android.R.layout.simple_list_item_1, filteredLocations);
-		
 		this.setListAdapter(adapter);
-		
 
 		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+	
+	@Override
+	public void onStart() {
+		this.getListView().setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(getActivity(), PlacesActivity.class);
+				intent.putExtra("location", position);
+				startActivity(intent);
+			}
+		});
+		super.onStart();
 	}
 	
 	@Override
