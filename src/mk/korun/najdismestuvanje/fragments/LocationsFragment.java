@@ -3,7 +3,7 @@ package mk.korun.najdismestuvanje.fragments;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import mk.korun.najdismestuvanje.PlacesActivity;
+import mk.korun.najdismestuvanje.PropertiesActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 public class LocationsFragment extends ListFragment {
 	private ArrayList<String> locations;
@@ -37,7 +36,7 @@ public class LocationsFragment extends ListFragment {
 	
 	@SuppressWarnings("unchecked")
 	public void filterLocations(String filter) {
-		if(filter != ""){
+		if(filter != "") {
 			filter = filter.toLowerCase(Locale.getDefault());
 			filteredLocations.clear();
 			for (String s : locations) {
@@ -69,8 +68,8 @@ public class LocationsFragment extends ListFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_SHORT).show();
-				Intent intent = new Intent(getActivity(), PlacesActivity.class);
+				//Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(getActivity(), PropertiesActivity.class);
 				intent.putExtra("location", position);
 				startActivity(intent);
 			}

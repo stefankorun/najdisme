@@ -1,6 +1,9 @@
-package mk.korun.najdismestuvanje;
+package mk.korun.najdismestuvanje.old;
 
-import mk.korun.najdismestuvanje.fragments.TestFragment;
+import mk.korun.najdismestuvanje.R;
+import mk.korun.najdismestuvanje.R.id;
+import mk.korun.najdismestuvanje.R.layout;
+import mk.korun.najdismestuvanje.R.menu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

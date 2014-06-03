@@ -7,10 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.View.OnKeyListener;
 import android.widget.EditText;
 
 public class StartActivity extends FragmentActivity {
@@ -23,17 +19,6 @@ public class StartActivity extends FragmentActivity {
 		setContentView(R.layout.activity_start);
 		createFragmentLocationsResult();
 		
-		/*
-		findViewById(R.id.edtSearchLocations).setOnKeyListener(new OnKeyListener() {
-			
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				EditText edt = (EditText) v;
-				locFragment.filterLocations(edt.getText().toString());
-				return false;
-			}
-		});
-		*/
 		((EditText) findViewById(R.id.edtSearchLocations)).addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -59,14 +44,6 @@ public class StartActivity extends FragmentActivity {
 	}
 	
 	private void createFragmentLocationsResult() {
-		/*
-		 * Dodavam adapter sega vo fragmentot 
-		ListFragment lstFragment = new LocationsFragment();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		              android.R.layout.simple_list_item_1, android.R.id.text1, values);
-		
-		lstFragment.setListAdapter(adapter);*/
-		
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		fragmentTransaction.add(R.id.frlSearchLocationsResults, locFragment);
