@@ -1,13 +1,22 @@
 package mk.korun.najdismestuvanje;
 
+import java.io.IOException;
+import java.util.Locale;
+
 import mk.korun.najdismestuvanje.fragments.PropertyMapFragment;
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 
 public class PropertiesActivity extends FragmentActivity {
 	private PropertyMapFragment fragPropertyMap;
@@ -23,12 +32,34 @@ public class PropertiesActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_properties);
 		
+		createMapFragment();
+	}
+	private void createMapFragment() {
+		Geocoder gcoder = new Geocoder(this);
+		Address adrFromGcoder = new Address(Locale.getDefault());
+		
+		/*LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		String locationProvider = LocationManager.NETWORK_PROVIDER;
+		Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);*/
+		
+		try {
+			adrFromGcoder = gcoder.getFromLocationName("Bitola, Macedonia", 2).get(0);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		GoogleMapOptions gmOptions = new GoogleMapOptions();
+		gmOptions.camera(CameraPosition.fromLatLngZoom(
+				new LatLng(adrFromGcoder.getLatitude(), adrFromGcoder.getLongitude()), 11));
+		
 		fragPropertyMap = new PropertyMapFragment();
 		
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.add(R.id.frlPropertiesMap, fragPropertyMap.instance);
+		fragmentTransaction.add(R.id.frlPropertiesMap, fragPropertyMap.getInstance(gmOptions));
 		fragmentTransaction.commit();
+		
 	}
 	
 	
