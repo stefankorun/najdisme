@@ -1,20 +1,41 @@
 package mk.korun.najdismestuvanje;
 
+import mk.korun.najdismestuvanje.fragments.PropertyMapFragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.widget.Toast;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 
 public class PropertiesActivity extends FragmentActivity {
-
-	// Google Map
-    private GoogleMap googleMap;
+	private PropertyMapFragment fragPropertyMap;
   
-    /**
+ 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //initilizeMap();
+    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_properties);
+		
+		fragPropertyMap = new PropertyMapFragment();
+		
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.add(R.id.frlPropertiesMap, fragPropertyMap.instance);
+		fragmentTransaction.commit();
+	}
+	
+	
+	
+	/**
      * function to load map. If map is not created it will create it for you
-     * */
+     * 
     private void initilizeMap() {
         if (googleMap == null) {
             googleMap = ((MapFragment) getFragmentManager().findFragmentById(
@@ -28,23 +49,5 @@ public class PropertiesActivity extends FragmentActivity {
             }
         }
     }
- 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initilizeMap();
-    }
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_properties);
-		try {
-            // Loading map
-            initilizeMap();
- 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-	}
-	
+	*/
 }
