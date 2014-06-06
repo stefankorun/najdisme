@@ -1,22 +1,21 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:tag="land_orientation"
     tools:context="${packageName}.${activityClass}" >
-
-    <FrameLayout
-        android:id="@+id/frlPropertiesMap"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignLeft="@+id/fragPropertyList"
-        android:layout_alignParentRight="true" >
-    </FrameLayout>
 
     <fragment
         android:id="@+id/fragPropertyList"
         android:name="mk.korun.najdismestuvanje.fragments.PropertyListFragment"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true" />
+        android:layout_width="300dp"
+        android:layout_height="match_parent" />
 
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/frlPropertiesMap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </FrameLayout>
+
+</LinearLayout>

@@ -4,17 +4,10 @@
     android:layout_height="match_parent"
     tools:context="${packageName}.${activityClass}" >
 
-    <fragment
-        android:id="@+id/fragPropertyList"
-        android:name="mk.korun.najdismestuvanje.fragments.PropertyListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
-
     <FrameLayout
-        android:id="@+id/frlPropertiesMap"
+        android:id="@+id/frlPropertiesBoth"
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
-        android:layout_below="@+id/fragPropertyList"
         >
     </FrameLayout>
 

@@ -11,9 +11,8 @@ public class PropertyMapFragment extends SupportMapFragment  {
 	
 	public PropertyMapFragment() {
 		super();
+		instance = null;
 	}
-	
-	
 	public SupportMapFragment getInstance() {
 		if(instance == null) {
 			instance = newInstance();
@@ -24,12 +23,9 @@ public class PropertyMapFragment extends SupportMapFragment  {
 		instance = newInstance(gmOptions);
 		return instance;
 	}
-	
 	@Override
 	public void onResume() {
 		gmap = getMap();
-		
 		super.onResume();
 	}
-	
 }
