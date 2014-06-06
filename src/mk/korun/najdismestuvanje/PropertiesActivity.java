@@ -4,12 +4,17 @@ import java.io.IOException;
 import java.util.Locale;
 
 import mk.korun.najdismestuvanje.fragments.PropertyMapFragment;
+import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -30,17 +35,44 @@ public class PropertiesActivity extends FragmentActivity {
 		setContentView(R.layout.activity_properties);
 		
 		createMapFragment();
+		manageFragments();
+		
 	}
+	
+	
+	private void manageFragments() {
+		DisplayMetrics dm1 = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm1);
+		Log.d("Display metrics", dm1.toString());
+		
+		int screenSize = getResources().getConfiguration().screenLayout &
+		        Configuration.SCREENLAYOUT_SIZE_MASK;
+
+		String toastMsg;
+		switch(screenSize) {
+		    case Configuration.SCREENLAYOUT_SIZE_LARGE:
+		        toastMsg = "Large screen";
+		        break;
+		    case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+		        toastMsg = "Normal screen";
+		        break;
+		    case Configuration.SCREENLAYOUT_SIZE_SMALL:
+		        toastMsg = "Small screen";
+		        break;
+		    default:
+		        toastMsg = "Screen size is neither large, normal or small";
+		}
+		Log.d("screenSize", toastMsg);
+	}
+	
 	private void createMapFragment() {
 		Geocoder gcoder = new Geocoder(this);
 		Address adrFromGcoder = new Address(Locale.getDefault());
 		
-		/*LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-		String locationProvider = LocationManager.NETWORK_PROVIDER;
-		Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);*/
+		String selectedLocation = getIntent().getStringExtra("location");
 		
 		try {
-			adrFromGcoder = gcoder.getFromLocationName("Bitola, Macedonia", 2).get(0);
+			adrFromGcoder = gcoder.getFromLocationName(selectedLocation + ", Macedonia", 2).get(0);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,26 +88,5 @@ public class PropertiesActivity extends FragmentActivity {
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		fragmentTransaction.add(R.id.frlPropertiesMap, fragPropertyMap.getInstance(gmOptions));
 		fragmentTransaction.commit();
-		
 	}
-	
-	
-	
-	/**
-     * function to load map. If map is not created it will create it for you
-     * 
-    private void initilizeMap() {
-        if (googleMap == null) {
-            googleMap = ((MapFragment) getFragmentManager().findFragmentById(
-                    R.id.map)).getMap();
- 
-            // check if map is created successfully or not
-            if (googleMap == null) {
-                Toast.makeText(getApplicationContext(),
-                        "Sorry! unable to create maps", Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
-    }
-	*/
 }

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 public class LocationsFragment extends ListFragment {
 	private ArrayList<String> locations;
@@ -70,7 +71,8 @@ public class LocationsFragment extends ListFragment {
 					int position, long id) {
 				//Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(getActivity(), PropertiesActivity.class);
-				intent.putExtra("location", position);
+				TextView tv = (TextView) view.findViewById(android.R.id.text1);
+				intent.putExtra("location", tv.getText());
 				startActivity(intent);
 			}
 		});
