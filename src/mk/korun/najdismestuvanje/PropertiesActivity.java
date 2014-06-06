@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -21,15 +24,23 @@ import com.google.android.gms.maps.model.LatLng;
 public class PropertiesActivity extends FragmentActivity {
 	private PropertyMapFragment fragPropertyMap;
 	private PropertyListFragment fragPropertyList;
-	private FragmentManager fragmentManager;
-	private FragmentTransaction fragmentTransaction;
-  
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_properties);
 		
-		fragmentManager = getSupportFragmentManager();
+		//Getting the container Layout from the loaded .xml file
+		View v = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+		if(v.getTag().toString().equals("land_orientation")) {
+			displayBothFragments();
+		} else {
+			displayMapFragment();
+		}
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,26 +53,37 @@ public class PropertiesActivity extends FragmentActivity {
 		// Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	        case R.id.action_showList:
-	        	createListFragment();
+	        	displayListFragment();
 	            return true;
 	        case R.id.action_showMap:
-	        	createMapFragment();
-	            return true;
+	        	displayMapFragment();
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
-	@Override
-	protected void onResume() {
-		createListFragment();
-		super.onResume();
-	}
+
+
 	
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
+	private void displayBothFragments() {
+		if(fragPropertyMap == null)	createMapFragment();
+		if(fragPropertyList == null) createListFragment();
+		
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(R.id.frlPropertiesMap, fragPropertyMap.getInstance());
+		fragmentTransaction.replace(R.id.frlPropertyList, fragPropertyList);
+		fragmentTransaction.commit();
+		
 	}
-	
+	private void displayMapFragment() {
+		if(fragPropertyMap == null)	createMapFragment();
+		
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(R.id.frlPropertiesBoth, fragPropertyMap.getInstance());
+		fragmentTransaction.commit();
+	}
 	private void createMapFragment() {
 		fragPropertyMap = new PropertyMapFragment();
 		
@@ -81,22 +103,19 @@ public class PropertiesActivity extends FragmentActivity {
 		
 		GoogleMapOptions gmOptions = new GoogleMapOptions();
 		gmOptions.camera(CameraPosition.fromLatLngZoom(
-				new LatLng(adrFromGcoder.getLatitude(), adrFromGcoder.getLongitude()), 11));
+				new LatLng(adrFromGcoder.getLatitude(), adrFromGcoder.getLongitude()), 12));
+		fragPropertyMap.getInstance(gmOptions);
+	}
+	private void displayListFragment() {
+		if(fragPropertyList == null) createListFragment();
 		
-		fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.hide(fragPropertyList);
-		fragmentTransaction.add(R.id.frlPropertiesBoth, fragPropertyMap.getInstance(gmOptions));
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(R.id.frlPropertiesBoth, fragPropertyList);
 		fragmentTransaction.commit();
 	}
-	
 	private void createListFragment() {
 		fragPropertyList = new PropertyListFragment();
-
-		fragmentTransaction = fragmentManager.beginTransaction();
-		if(fragPropertyMap != null) fragmentTransaction.hide(fragPropertyMap.getInstance());
-		fragmentTransaction.add(R.id.frlPropertiesBoth, fragPropertyList);
-		fragmentTransaction.commit();
-		
 	}
 	
 }

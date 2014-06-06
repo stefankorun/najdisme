@@ -6,11 +6,11 @@
     android:tag="land_orientation"
     tools:context="${packageName}.${activityClass}" >
 
-    <fragment
-        android:id="@+id/fragPropertyList"
-        android:name="mk.korun.najdismestuvanje.fragments.PropertyListFragment"
+    <FrameLayout
+        android:id="@+id/frlPropertyList"
         android:layout_width="300dp"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frlPropertiesMap"
