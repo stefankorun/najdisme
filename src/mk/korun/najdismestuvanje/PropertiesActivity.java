@@ -27,6 +27,7 @@ public class PropertiesActivity extends FragmentActivity {
 	private PropertyMapFragment fragPropertyMap;
 	private static PropertyListFragment fragPropertyList;
 	private PropertiesManager propertiesManager;
+	FragmentManager fragmentManager;
 	
 
 	@Override
@@ -34,6 +35,7 @@ public class PropertiesActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_properties);
 		
+		fragmentManager = getSupportFragmentManager();
 		propertiesManager = new PropertiesManager(this);
 	}
 	@Override
@@ -73,20 +75,43 @@ public class PropertiesActivity extends FragmentActivity {
 	private void displayBothFragments() {
 		if(fragPropertyMap == null)	createMapFragment();
 		if(fragPropertyList == null) createListFragment();
-		propertiesManager.updateData();
+		propertiesManager.updateData(
+				"41.11016012099889", "41.12373917672242", "20.771201015625024", "20.837118984375024");
 		
-		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.replace(R.id.frlPropertiesMap, fragPropertyMap.getInstance());
-		fragmentTransaction.replace(R.id.frlPropertyList, fragPropertyList);
+		fragmentTransaction.add(R.id.frlPropertiesMap, fragPropertyMap.getInstance());
+		fragmentTransaction.add(R.id.frlPropertyList, fragPropertyList);
 		fragmentTransaction.commit();
+		
+		//fragmentManager ne e potreben ko ke imame 2 fragmenti vo prozorec
+		fragmentManager = null;
 	}
 	private void displayMapFragment() {
-		if(fragPropertyMap == null)	createMapFragment();
+		if(fragPropertyMap == null) createMapFragment();
 		
-		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.replace(R.id.frlPropertiesBoth, fragPropertyMap.getInstance());
+		//Proverka dali na pocetok postojt fragPropertyList zs prvo e inicijalzirana samo mapava
+		if(fragPropertyList != null) fragmentTransaction.hide(fragPropertyList);
+		//Proverka dali e vekje dodaen fragPropertyMap vo frlPropertiesBoth
+		if(fragmentManager.findFragmentById(fragPropertyMap.getInstance().getId()) == null)
+			//TODO Pubav fix za ostanvenje na stariot fragment pri rotacija
+			fragmentTransaction.replace(R.id.frlPropertiesBoth, fragPropertyMap.getInstance());
+		else 
+			fragmentTransaction.show(fragPropertyMap.getInstance());
+		fragmentTransaction.commit();
+	}
+	private void displayListFragment() {
+		if(fragPropertyList == null) createListFragment();
+		propertiesManager.updateData(
+				"41.11016012099889", "41.12373917672242", "20.771201015625024", "20.837118984375024");
+		
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.hide(fragPropertyMap.getInstance());
+		//Proverka dali e vekje dodaen fragPropertyMap vo frlPropertiesBoth
+		if(fragmentManager.findFragmentById(fragPropertyList.getId()) == null)
+			fragmentTransaction.add(R.id.frlPropertiesBoth, fragPropertyList);
+		else 
+			fragmentTransaction.show(fragPropertyList);
 		fragmentTransaction.commit();
 	}
 	private void createMapFragment() {
@@ -110,15 +135,6 @@ public class PropertiesActivity extends FragmentActivity {
 		gmOptions.camera(CameraPosition.fromLatLngZoom(
 				new LatLng(adrFromGcoder.getLatitude(), adrFromGcoder.getLongitude()), 12));
 		fragPropertyMap.getInstance(gmOptions);
-	}
-	private void displayListFragment() {
-		if(fragPropertyList == null) createListFragment();
-		propertiesManager.updateData();
-		
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.replace(R.id.frlPropertiesBoth, fragPropertyList);
-		fragmentTransaction.commit();
 	}
 	private void createListFragment() {
 		fragPropertyList = new PropertyListFragment();

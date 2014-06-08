@@ -1,4 +1,4 @@
-package mk.korun.najdismestuvanje.net;
+package mk.korun.najdismestuvanje.old;
 
 import android.content.Context;
 import android.util.Log;

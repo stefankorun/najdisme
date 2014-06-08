@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Response;
@@ -33,6 +35,7 @@ public class CustomJsonArrayRequest extends JsonRequest<JSONArray> {
 		arg0.data.toString();
 		try {
 			String resData = new String(arg0.data, "UTF-8");
+			Log.d("REQUEST TEST", resData);
 			return Response.success(new JSONArray(resData), getCacheEntry());
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

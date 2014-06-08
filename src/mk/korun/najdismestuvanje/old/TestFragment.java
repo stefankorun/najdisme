@@ -1,7 +1,6 @@
 package mk.korun.najdismestuvanje.old;
 
 import mk.korun.najdismestuvanje.R;
-import mk.korun.najdismestuvanje.net.JsonRequest1;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

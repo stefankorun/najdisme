@@ -30,11 +30,17 @@ public class PropertyListFragment extends ListFragment {
 		adapter.properties = p;
 		adapter.notifyDataSetChanged();
 	}
+	
+	
+	
+	
+	
 	private class PropertyListAdapter extends BaseAdapter {
 		ArrayList<Property> properties;
 		
 		public PropertyListAdapter() {
 			properties = new ArrayList<Property>();
+			properties.add(new Property("Loading", "Се вчитува"));
 		}
 		@Override
 		public int getCount() {
