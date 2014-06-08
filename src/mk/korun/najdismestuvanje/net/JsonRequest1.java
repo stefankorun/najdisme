@@ -13,12 +13,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-public class JsonRequest {
+public class JsonRequest1 {
 	private String baseUrl = "https://api.foursquare.com/v2/users/self?oauth_token=OMYLKKWRQL5WXLMTGS2DZWBP5C1EX14AFSWPUVIKO5FBPR3V&v=20140527";
 	private RequestQueue queue;
 	private JsonObjectRequest request;
 	
-	public JsonRequest(Context context) {
+	public JsonRequest1(Context context) {
 		queue = Volley.newRequestQueue(context);
 		
 		String searchQuerry = "";

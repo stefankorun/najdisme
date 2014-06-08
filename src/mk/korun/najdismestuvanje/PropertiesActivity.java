@@ -1,16 +1,18 @@
 package mk.korun.najdismestuvanje;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import mk.korun.najdismestuvanje.fragments.PropertyListFragment;
 import mk.korun.najdismestuvanje.fragments.PropertyMapFragment;
+import mk.korun.najdismestuvanje.models.Property;
+import mk.korun.najdismestuvanje.net.PropertiesManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,13 +25,19 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class PropertiesActivity extends FragmentActivity {
 	private PropertyMapFragment fragPropertyMap;
-	private PropertyListFragment fragPropertyList;
+	private static PropertyListFragment fragPropertyList;
+	private PropertiesManager propertiesManager;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_properties);
 		
+		propertiesManager = new PropertiesManager(this);
+	}
+	@Override
+	protected void onResume() {
 		//Getting the container Layout from the loaded .xml file
 		View v = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
 		if(v.getTag().toString().equals("land_orientation")) {
@@ -37,9 +45,6 @@ public class PropertiesActivity extends FragmentActivity {
 		} else {
 			displayMapFragment();
 		}
-	}
-	@Override
-	protected void onResume() {
 		super.onResume();
 	}
 	@Override
@@ -68,13 +73,13 @@ public class PropertiesActivity extends FragmentActivity {
 	private void displayBothFragments() {
 		if(fragPropertyMap == null)	createMapFragment();
 		if(fragPropertyList == null) createListFragment();
+		propertiesManager.updateData();
 		
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		fragmentTransaction.replace(R.id.frlPropertiesMap, fragPropertyMap.getInstance());
 		fragmentTransaction.replace(R.id.frlPropertyList, fragPropertyList);
 		fragmentTransaction.commit();
-		
 	}
 	private void displayMapFragment() {
 		if(fragPropertyMap == null)	createMapFragment();
@@ -108,6 +113,7 @@ public class PropertiesActivity extends FragmentActivity {
 	}
 	private void displayListFragment() {
 		if(fragPropertyList == null) createListFragment();
+		propertiesManager.updateData();
 		
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -116,6 +122,12 @@ public class PropertiesActivity extends FragmentActivity {
 	}
 	private void createListFragment() {
 		fragPropertyList = new PropertyListFragment();
+	}
+	
+	
+	/* === STATIC FUNCIONS === */
+	public static void updateFragmentListProperties(ArrayList<Property> p) {
+		fragPropertyList.updateProperties(p);
 	}
 	
 }

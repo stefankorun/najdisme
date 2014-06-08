@@ -1,0 +1,81 @@
+package mk.korun.najdismestuvanje.net;
+
+import java.util.ArrayList;
+
+import mk.korun.najdismestuvanje.PropertiesActivity;
+import mk.korun.najdismestuvanje.models.Property;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.util.Log;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+
+public class PropertiesManager {
+	private ArrayList<Property> properties;
+	private Context context;
+	
+	private String baseUrl = "http://najdismestuvanje.x10.mx/ajaxServises/getProfileJson.php?";
+	private RequestQueue queue;
+	private JSONObject requestData;
+	private JSONArray responseData;
+
+	
+	public PropertiesManager(Context context) {
+		this.context = context;
+		queue = Volley.newRequestQueue(context);
+		requestData = new JSONObject();
+		properties = new ArrayList<Property>();
+	}
+	
+	public ArrayList<Property> getProperties() {
+		return properties;
+	}
+	private void updateList(JSONArray responseData) {
+		this.responseData = responseData;
+		
+		properties.clear();
+		for(int i = 0; i < responseData.length(); ++i) {
+			JSONObject jsonTemp = (JSONObject) responseData.opt(i);
+			
+			Property p = new Property();
+			p.name = jsonTemp.optString("name");
+			p.description = jsonTemp.optString("opis");
+			
+			properties.add(p);
+		}
+		PropertiesActivity.updateFragmentListProperties(properties);
+	}
+	public void updateData() {
+		try {
+			requestData.putOpt("lat1", "41.115624412127175");
+			requestData.putOpt("lat2", "41.12920233750197");
+			requestData.putOpt("lat1", "20.771201015625024");
+			requestData.putOpt("lat2", "20.837118984375024");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		CustomJsonArrayRequest cjar = new CustomJsonArrayRequest(Request.Method.GET, baseUrl, requestData, new Listener<JSONArray>() {
+			@Override
+			public void onResponse(JSONArray arg0) {
+				responseData = arg0;
+				updateList(arg0);
+			}
+		}, new ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError arg0) {
+				Log.d("JSON Error Response", arg0.toString());
+			}
+		});
+		
+		queue.add(cjar);
+	}
+}

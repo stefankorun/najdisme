@@ -1,4 +1,4 @@
-package mk.korun.najdismestuvanje.fragments;
+ package mk.korun.najdismestuvanje.fragments;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class PropertyListFragment extends ListFragment {
 	private PropertyListAdapter adapter;
-	
+		
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -23,40 +23,31 @@ public class PropertyListFragment extends ListFragment {
 		this.setListAdapter(adapter);
 		
 		return super.onCreateView(inflater, container, savedInstanceState);
-	}	
+	}
 	
 	
+	public void updateProperties(ArrayList<Property> p) {
+		adapter.properties = p;
+		adapter.notifyDataSetChanged();
+	}
 	private class PropertyListAdapter extends BaseAdapter {
 		ArrayList<Property> properties;
 		
 		public PropertyListAdapter() {
 			properties = new ArrayList<Property>();
-			
-			properties.add(new Property());
-			properties.add(new Property());
-			properties.add(new Property());
-			properties.add(new Property());
 		}
-		
-		public PropertyListAdapter(ArrayList<Property> p) {
-			properties = p;
-		}
-
 		@Override
 		public int getCount() {
 			return properties.size();
 		}
-
 		@Override
 		public Object getItem(int position) {
 			return properties.get(position);
 		}
-
 		@Override
 		public long getItemId(int position) {
 			return position;
 		}
-
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -67,8 +58,5 @@ public class PropertyListFragment extends ListFragment {
 			txvDescription.setText(properties.get(position).description);
 			return v;
 		}
-
-
-		
 	}
 }
