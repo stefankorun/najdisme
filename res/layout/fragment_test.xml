@@ -11,52 +11,27 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="44dp"
-        android:text="Najdi Smestuvanje"
+        android:text="Domasna po JMM"
 	    android:fontFamily="sans-serif-thin"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/requestBtn"
+    <ProgressBar
+        android:id="@+id/progressBar1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        android:fontFamily="sans-serif-thin"
-        android:text="Send request" />
-
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/requestBtn"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/progressBar1"
-        android:layout_centerHorizontal="true"
-        android:text="response_text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:visibility="gone" />
 
     <Button
-        android:id="@+id/gotoLifecycleActivityBtn"
+        android:id="@+id/btnStartService"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Lifecycle" />
-
-    <Button
-        android:id="@+id/gotoIntentActivityBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/gotoLifecycleActivityBtn"
-        android:layout_centerHorizontal="true"
-        android:text="Intents" />
+        android:layout_marginTop="25dp"
+        android:text="Start service"
+        />
 
 </RelativeLayout>

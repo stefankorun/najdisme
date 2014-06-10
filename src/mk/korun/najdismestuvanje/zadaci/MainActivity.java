@@ -1,4 +1,4 @@
-package mk.korun.najdismestuvanje.old;
+package mk.korun.najdismestuvanje.zadaci;
 
 import mk.korun.najdismestuvanje.R;
 import mk.korun.najdismestuvanje.R.id;

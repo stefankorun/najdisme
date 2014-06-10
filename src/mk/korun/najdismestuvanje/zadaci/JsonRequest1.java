@@ -1,4 +1,4 @@
-package mk.korun.najdismestuvanje.old;
+package mk.korun.najdismestuvanje.zadaci;
 
 import org.json.JSONObject;
 

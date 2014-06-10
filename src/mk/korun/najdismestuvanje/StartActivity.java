@@ -2,12 +2,16 @@ package mk.korun.najdismestuvanje;
 
 import mk.korun.najdismestuvanje.fragments.LocationsFragment;
 import mk.korun.najdismestuvanje.net.PropertiesManager;
+import mk.korun.najdismestuvanje.zadaci.MainActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 
 public class StartActivity extends FragmentActivity {
@@ -42,5 +46,11 @@ public class StartActivity extends FragmentActivity {
 		fragmentTransaction.add(R.id.frlSearchLocationsResults, locFragment);
 		fragmentTransaction.commit();
 		
+	}
+	
+	
+	public void gotoTestActivity(View v) {
+		Intent i = new Intent(this, MainActivity.class);
+		startActivity(i);
 	}
 }

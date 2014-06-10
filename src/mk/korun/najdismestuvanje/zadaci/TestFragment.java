@@ -1,6 +1,7 @@
-package mk.korun.najdismestuvanje.old;
+package mk.korun.najdismestuvanje.zadaci;
 
 import mk.korun.najdismestuvanje.R;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,20 +17,12 @@ public class TestFragment extends Fragment {
 		
 		View view = inflater.inflate(mk.korun.najdismestuvanje.R.layout.fragment_test, container, false);
 		
-		/* Adding font to view
-		 * 
-		TextView txt_naslov = (TextView) view.findViewById(R.id.title);
-		Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Roboto-Light.ttf"); 
-		txt_naslov.setTypeface(type);
-		*/
-		
-		Button requestBtn = (Button) view.findViewById(R.id.requestBtn);
+		Button requestBtn = (Button) view.findViewById(R.id.btnStartService);
 		requestBtn.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
-				JsonRequest1 req = new JsonRequest1(getActivity());
-				req.send();
+				Intent serviceIntent = new Intent(getActivity(), TestIntentService.class);
+				getActivity().startService(serviceIntent);
 			}
 		});
 		return view;
