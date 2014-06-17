@@ -24,7 +24,7 @@ public class MainActivity extends FragmentActivity {
         // Dynamically add fragment to FrameLayout
         FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.add(R.id.frame_container, new TestFragment());
+		fragmentTransaction.add(R.id.frame_container, new MainFragment());
 		fragmentTransaction.commit();
     }
     
