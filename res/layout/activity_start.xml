@@ -20,7 +20,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/txtAppTitle"
+        android:fontFamily="sans-serif-thin"
+        android:hint="пребарај места"
         android:layout_marginTop="42dp"
         android:ems="10"
         android:inputType="text" >

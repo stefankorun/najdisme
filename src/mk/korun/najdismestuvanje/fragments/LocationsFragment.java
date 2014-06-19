@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import mk.korun.najdismestuvanje.PropertiesActivity;
+import mk.korun.najdismestuvanje.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -56,7 +57,7 @@ public class LocationsFragment extends ListFragment {
 			Bundle savedInstanceState) {
 		
 		adapter = new ArrayAdapter<String>(getActivity(), 
-				android.R.layout.simple_list_item_1, filteredLocations);
+				R.layout.adapter_locationslist, filteredLocations);
 		this.setListAdapter(adapter);
 
 		return super.onCreateView(inflater, container, savedInstanceState);
