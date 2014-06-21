@@ -20,12 +20,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/txtAppTitle"
+        android:layout_marginTop="42dp"
+        android:layout_toLeftOf="@+id/btnGoToTestActivity"
+        android:ems="10"
         android:fontFamily="sans-serif-thin"
         android:hint="пребарај места"
-        android:layout_marginTop="42dp"
-        android:ems="10"
         android:inputType="text" >
 
         <requestFocus />
@@ -44,13 +44,24 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnGoToTestActivity"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="domasna"
-        android:onClick="gotoTestActivity" />
+        android:onClick="gotoTestActivity"
+        android:text="domasna" />
+
+    <Button
+        android:id="@+id/btnSearchGeocoder"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edtSearchLocations"
+        android:layout_alignLeft="@+id/btnGoToTestActivity"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/edtSearchLocations"
+        android:text="Search" />
 
 </RelativeLayout>

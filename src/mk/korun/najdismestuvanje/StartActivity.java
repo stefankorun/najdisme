@@ -1,6 +1,6 @@
 package mk.korun.najdismestuvanje;
 
-import mk.korun.najdismestuvanje.fragments.LocationsFragment;
+import mk.korun.najdismestuvanje.fragments.LocationsListFragment;
 import mk.korun.najdismestuvanje.zadaci.MainActivity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -16,10 +16,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class StartActivity extends FragmentActivity {
-	LocationsFragment locFragment = new LocationsFragment();
+	LocationsListFragment locFragment = new LocationsListFragment();
 	
 
 	@Override
@@ -32,7 +34,7 @@ public class StartActivity extends FragmentActivity {
 		((EditText) findViewById(R.id.edtSearchLocations)).addTextChangedListener(new TextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
-				locFragment.filterLocations(s.toString());
+				//locFragment.searchForLocations(s.toString());
 			}
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
@@ -41,6 +43,14 @@ public class StartActivity extends FragmentActivity {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
+			}
+		});
+		((Button) findViewById(R.id.btnSearchGeocoder)).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				EditText et = (EditText) findViewById(R.id.edtSearchLocations);
+				locFragment.searchForLocations(et.getText().toString());
+//				locFragment.testNotifyAdapter();
 			}
 		});
 	}
@@ -58,7 +68,6 @@ public class StartActivity extends FragmentActivity {
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		fragmentTransaction.add(R.id.frlSearchLocationsResults, locFragment);
 		fragmentTransaction.commit();
-		
 	}
 	
 	
@@ -77,7 +86,6 @@ public class StartActivity extends FragmentActivity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("This application requires internet connectivity.\n\nTurn WiFi on?").setTitle("No internet access");
 		
-		AlertDialog dialog = builder.create();
 		// Add the buttons
 		builder.setPositiveButton("Go to settings", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
