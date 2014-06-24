@@ -24,16 +24,24 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
 public class PropertiesActivity extends FragmentActivity {
+	//Fragment manager
+	FragmentManager fragmentManager;
+	//Fragments
 	private PropertyMapFragment fragPropertyMap;
 	private static PropertyListFragment fragPropertyList;
+	//Bundle data
+	Bundle savedInstanceState;
+	
+	//Network manager for properties (mesta)
 	private PropertiesManager propertiesManager;
-	FragmentManager fragmentManager;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_properties);
+		
+		this.savedInstanceState = savedInstanceState;
 		
 		fragmentManager = getSupportFragmentManager();
 		propertiesManager = new PropertiesManager(this);
@@ -48,6 +56,11 @@ public class PropertiesActivity extends FragmentActivity {
 			displayMapFragment();
 		}
 		super.onResume();
+	}
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		outState.putParcelable("fragPropertyMapCamera", fragPropertyMap.gmap.getCameraPosition());
+		super.onSaveInstanceState(outState);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,7 +84,6 @@ public class PropertiesActivity extends FragmentActivity {
 	}
 
 
-	
 	private void displayBothFragments() {
 		if(fragPropertyMap == null)	createMapFragment();
 		if(fragPropertyList == null) createListFragment();
@@ -131,9 +143,16 @@ public class PropertiesActivity extends FragmentActivity {
 			e.printStackTrace();
 		}
 		
+		CameraPosition camPos;
+		
+		if(savedInstanceState != null && savedInstanceState.getParcelable("fragPropertyMapCamera") != null) {
+			camPos = savedInstanceState.getParcelable("fragPropertyMapCamera");
+		} else {
+			camPos = CameraPosition.fromLatLngZoom(new LatLng(adrFromGcoder.getLatitude(), adrFromGcoder.getLongitude()), 12);
+		}
+		
 		GoogleMapOptions gmOptions = new GoogleMapOptions();
-		gmOptions.camera(CameraPosition.fromLatLngZoom(
-				new LatLng(adrFromGcoder.getLatitude(), adrFromGcoder.getLongitude()), 12));
+		gmOptions.camera(camPos);
 		fragPropertyMap.getInstance(gmOptions);
 	}
 	private void createListFragment() {

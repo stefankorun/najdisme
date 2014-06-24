@@ -21,7 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class StartActivity extends FragmentActivity {
-	LocationsListFragment locFragment = new LocationsListFragment();
+	LocationsListFragment fragLocationsList = new LocationsListFragment();
 	
 
 	@Override
@@ -49,7 +49,7 @@ public class StartActivity extends FragmentActivity {
 			@Override
 			public void onClick(View v) {
 				EditText et = (EditText) findViewById(R.id.edtSearchLocations);
-				locFragment.searchForLocations(et.getText().toString());
+				fragLocationsList.searchForLocations(et.getText().toString());
 //				locFragment.testNotifyAdapter();
 			}
 		});
@@ -66,7 +66,9 @@ public class StartActivity extends FragmentActivity {
 	private void createFragmentLocationsResult() {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.add(R.id.frlSearchLocationsResults, locFragment);
+		if(fragmentManager.findFragmentByTag("fragLocationsList") == null) {
+			fragmentTransaction.replace(R.id.frlSearchLocationsResults, fragLocationsList, "fragLocationsList");
+		}
 		fragmentTransaction.commit();
 	}
 	
