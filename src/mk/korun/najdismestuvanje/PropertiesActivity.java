@@ -59,7 +59,7 @@ public class PropertiesActivity extends FragmentActivity {
 	}
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		outState.putParcelable("fragPropertyMapCamera", fragPropertyMap.gmap.getCameraPosition());
+		outState.putParcelable("fragPropertyMapCamera", fragPropertyMap.getInstance().getMap().getCameraPosition());
 		super.onSaveInstanceState(outState);
 	}
 	@Override

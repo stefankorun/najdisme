@@ -19,8 +19,6 @@ public class TestIntentService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		// Normally we would do some work here, like download a file.
-		// For our sample, we just sleep for 5 seconds.
 		Log.d("Service request",
 				httpRequest("http://graph.facebook.com/?ids=http://www.imdb.com/title/tt0117500/"));
 	}
