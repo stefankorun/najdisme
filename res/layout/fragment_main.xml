@@ -41,6 +41,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnStartService"
         android:layout_centerHorizontal="true"
-        android:text="AddSqlComment" />
+        android:text="Add Sql Comment" />
+
+    <Button
+        android:id="@+id/btnSendBroadcast"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnAddSqlComment"
+        android:layout_centerHorizontal="true"
+        android:text="Send Broadcast" />
 
 </RelativeLayout>

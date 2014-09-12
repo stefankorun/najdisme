@@ -55,6 +55,13 @@
         </activity>
         <service android:name=".zadaci.TestIntentService">
         </service>
+        
+        
+        <receiver android:name="mk.korun.najdismestuvanje.zadaci.TestBroadcastReciever">
+            <intent-filter>
+                <action android:name="mk.korun.najdismestuvanje.TEST_RECIEVER" />
+            </intent-filter>
+        </receiver>
 
         <!-- Google API Key -->
         <meta-data

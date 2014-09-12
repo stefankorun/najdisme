@@ -13,29 +13,34 @@ import android.widget.Button;
 
 public class MainFragment extends Fragment {
 	CommentsSqlDatabase commentsDb;
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
 		commentsDb = new CommentsSqlDatabase(getActivity());
 		commentsDb.open();
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
-		View view = inflater.inflate(mk.korun.najdismestuvanje.R.layout.fragment_main, container, false);
-		
-		Button btnStartService = (Button) view.findViewById(R.id.btnStartService);
+
+		View view = inflater.inflate(
+				mk.korun.najdismestuvanje.R.layout.fragment_main, container,
+				false);
+
+		Button btnStartService = (Button) view
+				.findViewById(R.id.btnStartService);
 		btnStartService.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent serviceIntent = new Intent(getActivity(), TestIntentService.class);
+				Intent serviceIntent = new Intent(getActivity(),
+						TestIntentService.class);
 				getActivity().startService(serviceIntent);
 			}
 		});
-		Button btnAddSqlComment = (Button) view.findViewById(R.id.btnAddSqlComment);
+		Button btnAddSqlComment = (Button) view
+				.findViewById(R.id.btnAddSqlComment);
 		btnAddSqlComment.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -43,13 +48,23 @@ public class MainFragment extends Fragment {
 				Log.d("SQL USPESNO", commentsDb.getAllComments().toString());
 			}
 		});
+		Button btnSendBroadcast = (Button) view
+				.findViewById(R.id.btnSendBroadcast);
+		btnSendBroadcast.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setAction("mk.korun.najdismestuvanje.TEST_RECIEVER");
+				getActivity().sendBroadcast(intent);
+			}
+		});
 		return view;
 	}
-	
+
 	@Override
 	public void onPause() {
 		commentsDb.close();
 		super.onPause();
 	}
-	
+
 }
