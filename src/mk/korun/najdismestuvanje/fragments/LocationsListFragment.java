@@ -26,41 +26,6 @@ public class LocationsListFragment extends ListFragment {
 	
 	private ArrayAdapter<String> adapter;
 	
-	public LocationsListFragment() {
-		locations = new ArrayList<String>();
-		locations.add("Ohrid");
-		locations.add("Kicea");
-		locations.add("Kumanovo");
-		locations.add("Bitola");
-		locations.add("Skopje");
-		locations.add("Resen");
-		locations.add("Volino");
-		locations.add("Cicki");
-		filteredLocations = new ArrayList<String>(locations);
-	}
-	
-	public void filterLocations(String filter) {
-		if(filter != "") {
-			filter = filter.toLowerCase(Locale.getDefault());
-			filteredLocations.clear();
-			for (String s : locations) {
-				if(s.toLowerCase(Locale.getDefault()).matches(".*" + filter + ".*")) {
-					filteredLocations.add(s);
-				}
-			}
-		} else {
-			filteredLocations = new ArrayList<String>(locations);
-		}
-		adapter.notifyDataSetChanged();
-	}
-	public void searchForLocations(String filter) {
-		filteredLocations.clear();
-		filteredLocations.addAll(getLocationsBySearch(filter));
-		Log.d("searchForLocations", filteredLocations.toString());
-		adapter.notifyDataSetChanged();
-	}
-
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -89,9 +54,42 @@ public class LocationsListFragment extends ListFragment {
 		super.onStart();
 	}
 	
+	public LocationsListFragment() {
+		locations = new ArrayList<String>();
+		locations.add("Ohrid");
+		locations.add("Kicea");
+		locations.add("Kumanovo");
+		locations.add("Bitola");
+		locations.add("Skopje");
+		locations.add("Resen");
+		locations.add("Volino");
+		locations.add("Cicki");
+		filteredLocations = new ArrayList<String>(locations);
+	}
+	
+	public void filterLocations(String filter) {
+		// depricated - search in existing list of locations
+		if(filter != "") {
+			filter = filter.toLowerCase(Locale.getDefault());
+			filteredLocations.clear();
+			for (String s : locations) {
+				if(s.toLowerCase(Locale.getDefault()).matches(".*" + filter + ".*")) {
+					filteredLocations.add(s);
+				}
+			}
+		} else {
+			filteredLocations = new ArrayList<String>(locations);
+		}
+		adapter.notifyDataSetChanged();
+	}
 	
 	
-	
+	public void searchForLocations(String filter) {
+		filteredLocations.clear();
+		filteredLocations.addAll(getLocationsBySearch(filter));
+		adapter.notifyDataSetChanged();
+	}
+
 	private ArrayList<String> getLocationsBySearch(String searchString) {
 		Log.d("getLocationsBySearch ||| with string: ", searchString);
 		

@@ -31,26 +31,11 @@ public class StartActivity extends FragmentActivity {
 		createFragmentLocationsResult();
 		
 		// Event Listeners
-		((EditText) findViewById(R.id.edtSearchLocations)).addTextChangedListener(new TextWatcher() {
-			@Override
-			public void afterTextChanged(Editable s) {
-				//locFragment.searchForLocations(s.toString());
-			}
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-			}
-		});
 		((Button) findViewById(R.id.btnSearchGeocoder)).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				EditText et = (EditText) findViewById(R.id.edtSearchLocations);
 				fragLocationsList.searchForLocations(et.getText().toString());
-//				locFragment.testNotifyAdapter();
 			}
 		});
 	}

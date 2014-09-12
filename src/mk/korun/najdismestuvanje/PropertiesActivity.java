@@ -135,7 +135,7 @@ public class PropertiesActivity extends FragmentActivity {
 		String selectedLocation = getIntent().getStringExtra("location");
 		
 		try {
-			adrFromGcoder = gcoder.getFromLocationName(selectedLocation + ", Macedonia", 2).get(0);
+			adrFromGcoder = gcoder.getFromLocationName(selectedLocation, 2).get(0);
 		} catch (Exception e) {
 			//If getFromLocationName fails, set coordinates to Ohrid, Macedonia
 			adrFromGcoder.setLatitude(41.123);
