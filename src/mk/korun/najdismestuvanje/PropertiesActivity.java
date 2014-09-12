@@ -27,7 +27,7 @@ public class PropertiesActivity extends FragmentActivity {
 	//Fragment manager
 	FragmentManager fragmentManager;
 	//Fragments
-	private PropertyMapFragment fragPropertyMap;
+	private static PropertyMapFragment fragPropertyMap;
 	private static PropertyListFragment fragPropertyList;
 	//Bundle data
 	Bundle savedInstanceState;
@@ -100,6 +100,8 @@ public class PropertiesActivity extends FragmentActivity {
 	}
 	private void displayMapFragment() {
 		if(fragPropertyMap == null) createMapFragment();
+		propertiesManager.updateData(
+				"41.11016012099889", "41.12373917672242", "20.771201015625024", "20.837118984375024");
 		
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		//Proverka dali na pocetok postojt fragPropertyList zs prvo e inicijalzirana samo mapava
@@ -161,8 +163,12 @@ public class PropertiesActivity extends FragmentActivity {
 	
 	
 	/* === STATIC FUNCIONS === */
-	public static void updateFragmentListProperties(ArrayList<Property> p) {
-		fragPropertyList.updateProperties(p);
+	public static void updateFragmentListProperties(ArrayList<Property> properties) {
+		if(fragPropertyList != null) { 
+			// initialy fragPropertyList does not exists
+			fragPropertyList.updateProperties(properties);
+		}
+		fragPropertyMap.updateMarkers(properties);
 	}
 	
 }

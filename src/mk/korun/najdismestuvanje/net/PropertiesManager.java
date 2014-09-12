@@ -27,7 +27,7 @@ public class PropertiesManager {
 	private Context context;
 	
 	private String baseUrl = "http://najdismestuvanje.x10.mx/ajaxServises/getProfileJson.php?";
-	private String testUrl = "http://najdismestuvanje.x10.mx/stefantest/android_req_data.php";
+//	private String testUrl = "http://najdismestuvanje.x10.mx/stefantest/android_req_data.php";
 	private RequestQueue queue;
 	private JSONObject requestData;
 	private JSONArray responseData;
@@ -53,6 +53,8 @@ public class PropertiesManager {
 			Property p = new Property();
 			p.name = jsonTemp.optString("name");
 			p.description = jsonTemp.optString("opis");
+			p.latitude = jsonTemp.optString("latitude");
+			p.longitude = jsonTemp.optString("longtitude");
 			
 			properties.add(p);
 		}

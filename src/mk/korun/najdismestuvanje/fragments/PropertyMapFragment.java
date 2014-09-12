@@ -1,18 +1,18 @@
 package mk.korun.najdismestuvanje.fragments;
 
-import com.google.android.gms.maps.GoogleMap;
+import java.util.ArrayList;
+
+import mk.korun.najdismestuvanje.models.Property;
+
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class PropertyMapFragment extends SupportMapFragment {
-	private SupportMapFragment instance;
-
-	public GoogleMap gmap;
-
-	public PropertyMapFragment() {
-		super();
-		instance = null;
-	}
+	private SupportMapFragment instance = null;
+	private ArrayList<Marker> currentMarkers = new ArrayList<Marker>();
 
 	public SupportMapFragment getInstance() {
 		if (instance == null) {
@@ -26,9 +26,19 @@ public class PropertyMapFragment extends SupportMapFragment {
 		return instance;
 	}
 
-	@Override
-	public void onResume() {
-		gmap = getMap();
-		super.onResume();
+	public void updateMarkers(ArrayList<Property> properties) {
+		if (instance == null)
+			return;
+		for (Property property : properties) {
+			instance.getMap().addMarker(
+				new MarkerOptions()
+				.position(new LatLng(
+						Float.parseFloat(property.latitude), 
+						Float.parseFloat(property.longitude)
+					)
+				)
+				.title(property.name)
+			);
+		}
 	}
 }
