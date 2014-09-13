@@ -2,6 +2,7 @@ package mk.korun.najdismestuvanje.models;
 
 public class Property {
 	public String name;
+	public String type;
 	public String description;
 	public String latitude;
 	public String longitude;

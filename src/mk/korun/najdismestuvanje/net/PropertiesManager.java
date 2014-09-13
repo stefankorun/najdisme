@@ -53,6 +53,7 @@ public class PropertiesManager {
 			Property p = new Property();
 			p.name = jsonTemp.optString("name");
 			p.description = jsonTemp.optString("opis");
+			p.type = jsonTemp.optString("tip");
 			p.latitude = jsonTemp.optString("latitude");
 			p.longitude = jsonTemp.optString("longtitude");
 			

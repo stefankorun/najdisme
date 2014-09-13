@@ -2,14 +2,20 @@
 
 import java.util.ArrayList;
 
+import mk.korun.najdismestuvanje.PropertyProfileActivity;
 import mk.korun.najdismestuvanje.R;
 import mk.korun.najdismestuvanje.models.Property;
+import mk.korun.najdismestuvanje.zadaci.MainActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class PropertyListFragment extends ListFragment {
@@ -22,7 +28,17 @@ public class PropertyListFragment extends ListFragment {
 		adapter = new PropertyListAdapter();
 		this.setListAdapter(adapter);
 		
+	
 		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		Intent i = new Intent(getActivity(), PropertyProfileActivity.class);
+		i.putExtra("propertyName", adapter.properties.get(position).name);
+		i.putExtra("propertyType", adapter.properties.get(position).type);
+		i.putExtra("propertyDescription", adapter.properties.get(position).description);
+		startActivity(i);
+		super.onListItemClick(l, v, position, id);
 	}
 	
 	
@@ -30,9 +46,6 @@ public class PropertyListFragment extends ListFragment {
 		adapter.properties = p;
 		adapter.notifyDataSetChanged();
 	}
-	
-	
-	
 	
 	
 	private class PropertyListAdapter extends BaseAdapter {
@@ -57,12 +70,14 @@ public class PropertyListFragment extends ListFragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View v = inflater.inflate(R.layout.adapter_propertylist, parent, false);
-			TextView txvName = (TextView) v.findViewById(R.id.txvName);
-			TextView txvDescription = (TextView) v.findViewById(R.id.txvDescription);
+			if(convertView == null) {
+				convertView = inflater.inflate(R.layout.adapter_propertylist, parent, false);
+			}
+			TextView txvName = (TextView) convertView.findViewById(R.id.txvName);
+			TextView txvDescription = (TextView) convertView.findViewById(R.id.txvDescription);
 			txvName.setText(properties.get(position).name);
 			txvDescription.setText(properties.get(position).description);
-			return v;
+			return convertView;
 		}
 	}
 }
