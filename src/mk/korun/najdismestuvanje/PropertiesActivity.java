@@ -85,14 +85,14 @@ public class PropertiesActivity extends FragmentActivity {
 
 
 	private void displayBothFragments() {
-		if(fragPropertyMap == null)	createMapFragment();
-		if(fragPropertyList == null) createListFragment();
+		createMapFragment();
+		createListFragment();
 		propertiesManager.updateData(
 				"41.11016012099889", "41.12373917672242", "20.771201015625024", "20.837118984375024");
 		
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.add(R.id.frlPropertiesMap, fragPropertyMap.getInstance());
-		fragmentTransaction.add(R.id.frlPropertyList, fragPropertyList);
+		fragmentTransaction.replace(R.id.frlPropertiesMap, fragPropertyMap.getInstance());
+		fragmentTransaction.replace(R.id.frlPropertyList, fragPropertyList);
 		fragmentTransaction.commit();
 		
 		//fragmentManager ne e potreben ko ke imame 2 fragmenti vo prozorec

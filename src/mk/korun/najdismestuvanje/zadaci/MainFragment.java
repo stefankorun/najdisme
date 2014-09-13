@@ -29,8 +29,7 @@ public class MainFragment extends Fragment {
 				mk.korun.najdismestuvanje.R.layout.fragment_main, container,
 				false);
 
-		Button btnStartService = (Button) view
-				.findViewById(R.id.btnStartService);
+		Button btnStartService = (Button) view.findViewById(R.id.btnStartService);
 		btnStartService.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -39,8 +38,7 @@ public class MainFragment extends Fragment {
 				getActivity().startService(serviceIntent);
 			}
 		});
-		Button btnAddSqlComment = (Button) view
-				.findViewById(R.id.btnAddSqlComment);
+		Button btnAddSqlComment = (Button) view.findViewById(R.id.btnAddSqlComment);
 		btnAddSqlComment.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -48,14 +46,21 @@ public class MainFragment extends Fragment {
 				Log.d("SQL USPESNO", commentsDb.getAllComments().toString());
 			}
 		});
-		Button btnSendBroadcast = (Button) view
-				.findViewById(R.id.btnSendBroadcast);
+		Button btnSendBroadcast = (Button) view.findViewById(R.id.btnSendBroadcast);
 		btnSendBroadcast.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setAction("mk.korun.najdismestuvanje.TEST_RECIEVER");
 				getActivity().sendBroadcast(intent);
+			}
+		});
+		Button btnSendSms = (Button) view.findViewById(R.id.btnSendSms);
+		btnSendSms.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getActivity(), SendMessageActivity.class);
+				startActivity(i);
 			}
 		});
 		return view;

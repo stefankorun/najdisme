@@ -56,14 +56,14 @@ public class LocationsListFragment extends ListFragment {
 	
 	public LocationsListFragment() {
 		locations = new ArrayList<String>();
-		locations.add("Ohrid");
-		locations.add("Kicea");
-		locations.add("Kumanovo");
-		locations.add("Bitola");
-		locations.add("Skopje");
-		locations.add("Resen");
-		locations.add("Volino");
-		locations.add("Cicki");
+		locations.add("Ohrid, Macedonia");
+		locations.add("Kicevo, Macedonia");
+		locations.add("Kumanovo, Macedonia");
+		locations.add("Bitola, Macedonia");
+		locations.add("Skopje, Macedonia");
+		locations.add("Resen, Macedonia");
+		locations.add("Prilep, Macedonia");
+		locations.add("Veles, Macedonia");
 		filteredLocations = new ArrayList<String>(locations);
 	}
 	

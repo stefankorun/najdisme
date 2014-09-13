@@ -26,6 +26,7 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -33,15 +34,15 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="mk.korun.najdismestuvanje.zadaci.MainActivity"
+            android:name=".zadaci.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="mk.korun.najdismestuvanje.LifecycleActivity"
+            android:name=".LifecycleActivity"
             android:label="@string/title_activity_lifecycle" >
         </activity>
         <activity
-            android:name="mk.korun.najdismestuvanje.StartActivity"
+            android:name=".StartActivity"
             android:label="@string/title_activity_start" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,14 +51,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="mk.korun.najdismestuvanje.PropertiesActivity"
+            android:name=".PropertiesActivity"
             android:label="@string/title_activity_places" >
         </activity>
-        <service android:name=".zadaci.TestIntentService">
+
+        <service android:name=".zadaci.TestIntentService" >
         </service>
-        
-        
-        <receiver android:name="mk.korun.najdismestuvanje.zadaci.TestBroadcastReciever">
+
+        <receiver android:name=".zadaci.TestBroadcastReciever" >
             <intent-filter>
                 <action android:name="mk.korun.najdismestuvanje.TEST_RECIEVER" />
             </intent-filter>
@@ -71,6 +72,11 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="mk.korun.najdismestuvanje.zadaci.SendMessageActivity"
+            android:label="@string/title_activity_send_message" >
+        </activity>
     </application>
 
 </manifest>

@@ -57,12 +57,14 @@ public class PropertyListFragment extends ListFragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View v = inflater.inflate(R.layout.adapter_propertylist, parent, false);
-			TextView txvName = (TextView) v.findViewById(R.id.txvName);
-			TextView txvDescription = (TextView) v.findViewById(R.id.txvDescription);
+			if(convertView == null) {
+				convertView = inflater.inflate(R.layout.adapter_propertylist, parent, false);
+			}
+			TextView txvName = (TextView) convertView.findViewById(R.id.txvName);
+			TextView txvDescription = (TextView) convertView.findViewById(R.id.txvDescription);
 			txvName.setText(properties.get(position).name);
 			txvDescription.setText(properties.get(position).description);
-			return v;
+			return convertView;
 		}
 	}
 }
