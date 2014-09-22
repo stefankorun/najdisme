@@ -1,6 +1,7 @@
 package mk.korun.najdismestuvanje.zadaci;
 
 import mk.korun.najdismestuvanje.R;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.SmsManager;
@@ -25,6 +26,12 @@ public class SendMessageActivity extends ActionBarActivity {
 				EditText edtPhone = (EditText) findViewById(R.id.edtPhone);
 				EditText edtSmsContent = (EditText) findViewById(R.id.edtSmsContent);
 				SmsManager.getDefault().sendTextMessage(edtPhone.getText().toString(), null, edtSmsContent.getText().toString(), null,null);
+				
+				Intent returnIntent = new Intent();
+				returnIntent.putExtra("number", edtPhone.getText().toString());
+				returnIntent.putExtra("message", edtSmsContent.getText().toString());
+				setResult(RESULT_OK, returnIntent);
+				finish();
 			}
 		});
 	}

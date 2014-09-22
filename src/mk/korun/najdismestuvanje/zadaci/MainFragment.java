@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainFragment extends Fragment {
 	CommentsSqlDatabase commentsDb;
@@ -43,7 +44,7 @@ public class MainFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				commentsDb.createComment("test", "komentar");
-				Log.d("SQL USPESNO", commentsDb.getAllComments().toString());
+				Toast.makeText(getActivity(), "All comments: " + commentsDb.getAllComments(), Toast.LENGTH_SHORT).show();
 			}
 		});
 		Button btnSendBroadcast = (Button) view.findViewById(R.id.btnSendBroadcast);
@@ -60,12 +61,12 @@ public class MainFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getActivity(), SendMessageActivity.class);
-				startActivity(i);
+				startActivityForResult(i, 1);
 			}
 		});
 		return view;
 	}
-
+	
 	@Override
 	public void onPause() {
 		commentsDb.close();

@@ -42,6 +42,22 @@ public class MainActivity extends FragmentActivity {
     }
     
     @Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 1) {
+	        if(resultCode == RESULT_OK){
+	            String number = data.getStringExtra("number");
+	            String message = data.getStringExtra("message");
+	            
+	            Toast.makeText(this, "Trying to send message to:" + number + ". Message content:" + message, Toast.LENGTH_LONG).show();
+	            
+	        }
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    }
+	}
+    
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	// Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();

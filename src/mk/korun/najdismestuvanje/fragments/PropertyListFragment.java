@@ -76,7 +76,7 @@ public class PropertyListFragment extends ListFragment {
 			TextView txvName = (TextView) convertView.findViewById(R.id.txvName);
 			TextView txvDescription = (TextView) convertView.findViewById(R.id.txvDescription);
 			txvName.setText(properties.get(position).name);
-			txvDescription.setText(properties.get(position).description);
+//			txvDescription.setText(properties.get(position).description);
 			return convertView;
 		}
 	}
